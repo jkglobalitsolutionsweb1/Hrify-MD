@@ -1,0 +1,226 @@
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #ff0000;
+  color: #fff;
+  transition: all 0.3s;
+  width: 200px;
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    left: -200px;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+@media (max-width: 767px) {
+  .sidebar-overlay.show {
+    display: block;
+  }
+}
+
+.sidebar .nav-link {
+  color: #fff;
+  padding: 10px 15px;
+  display: block;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.sidebar .nav-link:hover {
+  background-color: black;
+  color: #fff;
+}
+
+.sidebar .nav-link.active {
+  background-color: black;
+  color: #fff;
+}
+
+.sidebar .dropdown-menu {
+  background: #ff0000;
+}
+
+.sidebar .dropdown-item {
+  color: #fff;
+}
+
+.sidebar .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.content {
+  margin-left: 200px;
+  transition: margin-left 0.3s;
+}
+
+@media (max-width: 767px) {
+  .content {
+    margin-left: 0;
+  }
+}
+
+.navbar {
+  background: #ff0000;
+  position: sticky;
+  top: 0;
+  z-index: 998;
+}
+
+.navbar-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border-radius: 0.25rem;
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+}
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.profile-icon {
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+@media (max-width: 767px) {
+  .navbar-brand {
+    position: static;
+    transform: none;
+  }
+}
+
+.sidebar-logo {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.sidebar-logo img {
+  max-width: 150px;
+  height: auto;
+}
+
+.custom-danger {
+  background-color: red;
+  color: white;
+}
+
+.table-container {
+  border: 1px solid #ff0000;
+  padding: 20px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.action-btn {
+  background-color: #ff0000;
+  border: none;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.custom-logo {
+  display: block;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-label .text-danger {
+  margin-left: 5px;
+}
+
+.form-control-file {
+  display: none;
+}
+
+.custom-file-upload {
+  background-color: #ff0000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.custom-file-upload i {
+  margin-right: 5px;
+}
+
+.list-group-item.active {
+  background-color: red;
+  border: none;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+@media (max-width: 767px) {
+  .main-content {
+    padding: 10px;
+  }
+}
+.custom-danger{
+  background-color: #ff0000;
+  color: white;
+}
