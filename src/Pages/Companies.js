@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Modal, Button, Form, Card } from 'react-bootstrap';
 import { FaUserCircle, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { firestore, storage, auth } from '../firebase/firebase';
-import { collection, getDocs, doc, updateDoc, getDoc, setDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, updateDoc, getDoc, setDoc, query, where } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 
@@ -21,6 +21,7 @@ const Companies = () => {
     confirmPassword: '',
     logoUrl: null,
     totalEmployees: '',
+    currentEmployeeCount: 0,
     status: 'active'
   });
   const [passwordError, setPasswordError] = useState('');
@@ -44,13 +45,19 @@ const Companies = () => {
             if (companyData.logoUrl) {
               try {
                 const logoUrl = await getDownloadURL(ref(storage, `logos/${companyData.logoUrl}`));
-                return { id: companyId, ...companyData, logoUrl };
+                companyData.logoUrl = logoUrl;
               } catch (error) {
                 console.error("Error fetching logo:", error);
-                return { id: companyId, ...companyData };
               }
             }
-            return { id: companyId, ...companyData };
+            
+            // Fetch employee count
+            const employeesRef = collection(firestore, 'employees');
+            const employeesQuery = query(employeesRef, where("companyId", "==", companyId));
+            const employeesSnapshot = await getDocs(employeesQuery);
+            const currentEmployeeCount = employeesSnapshot.size;
+
+            return { id: companyId, ...companyData, currentEmployeeCount };
           } else {
             console.warn(`No details found for company ${companyId}`);
             return null;
@@ -79,6 +86,7 @@ const Companies = () => {
       email: company.email,
       logoUrl: company.logoUrl,
       totalEmployees: company.totalEmployees || '',
+      currentEmployeeCount: company.currentEmployeeCount || 0,
       status: company.status || 'active'
     });
     setShowProfileModal(true);
@@ -100,6 +108,7 @@ const Companies = () => {
       confirmPassword: '',
       logoUrl: null,
       totalEmployees: '',
+      currentEmployeeCount: 0,
       status: 'active'
     });
     setPasswordError('');
@@ -459,6 +468,15 @@ const Companies = () => {
                       value={formData.totalEmployees}
                       onChange={handleInputChange}
                       required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Current Employee Count</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="currentEmployeeCount"
+                      value={formData.currentEmployeeCount}
+                      readOnly
                     />
                   </Form.Group>
                   <Form.Group className="mb-3">
